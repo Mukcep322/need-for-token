@@ -1,7 +1,14 @@
-import "../App.css"
+import "../Main.css"
+
+import Cursor from "../ReactBits/Animations/SplashCursor/SplashCursor.jsx"
 
 function Market() {
-  return <h1 className="text-2xl font-bold">Welcome to Market!</h1>
+  return (
+    <>
+      <Cursor />
+      <div className="bg-[#040212] w-full h-[100vh]"></div>
+    </>
+  )
 }
 
 export default Market

@@ -1,7 +1,7 @@
 function Header() {
   return (
     <>
-      <div className=" p-[15px] text-white flex items-center justify-center w-full h-fit ">
+      <div className=" p-[15px] text-white flex items-center justify-center w-full h-fit fixed z-20">
         {/* bg */}
         <div className="bg-black w-full h-[80px] absolute z-1 opacity-70 backdrop-blur-xs"></div>
         {/* main */}

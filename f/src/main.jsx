@@ -7,7 +7,7 @@ import Market from "./pages/Market.jsx"
 import Header from "./components/Header.jsx"
 
 createRoot(document.getElementById("root")).render(
-  <>
+  <div className="relative">
     <Header />
     <BrowserRouter>
       <Routes>
@@ -15,5 +15,5 @@ createRoot(document.getElementById("root")).render(
         <Route path="/Market" element={<Market />} />
       </Routes>
     </BrowserRouter>
-  </>
+  </div>
 )
