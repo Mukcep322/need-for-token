@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Unbounded";
+  src: url("../public/Unbounded/static/Unbounded-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("../public/fonts/Jost/Jost-VariableFont_wght.ttf") format("truetype");
+}
