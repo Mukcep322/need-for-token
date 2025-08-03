@@ -26,20 +26,22 @@ function App() {
           className={"absolute"}
         />
         <div className="absolute w-full h-fit bottom-0  flex justify-between items-end">
-          <img src="../public/imgInMain.png" />
-          <div className="pr-[100px] pb-[30px] lg:pb-[60px] flex flex-col gap-[200px] ">
-            <a className="text-white text-4xl  font-[Jost] font-light">
-              Lorem ipsum dolor sit
-              <br /> amet consectetur.Lorem
-              <br /> ipsum dolor sit amet
-              <br />
-              consectetur.
-            </a>
-            <a
-              href="/Market"
-              className="font-[Unbounded] text-xl px-12 py-4 bg-[#8CFF00] w-fit rounded-full cursor-pointer hover:bg-[#72CF00] transition">
-              Start Trading
-            </a>
+          <div className=" flex justify-between items-end w-full max-w-[1720px]">
+            <img src="../public/imgInMain.png" />
+            <div className="pr-[100px] pb-[30px] lg:pb-[60px] flex flex-col gap-[200px] ">
+              <a className="text-white text-4xl  font-[Jost] font-light">
+                Lorem ipsum dolor sit
+                <br /> amet consectetur.Lorem
+                <br /> ipsum dolor sit amet
+                <br />
+                consectetur.
+              </a>
+              <a
+                href="/Market"
+                className="font-[Unbounded] text-xl px-12 py-4 bg-[#8CFF00] w-fit rounded-full cursor-pointer hover:bg-[#72CF00] transition">
+                Start Trading
+              </a>
+            </div>
           </div>
         </div>
       </div>

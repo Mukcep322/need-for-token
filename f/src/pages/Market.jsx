@@ -6,7 +6,7 @@ function Market() {
   return (
     <>
       <Cursor />
-      <div className="bg-[#040212] w-full h-[100vh]"></div>
+      <div className="bg-[#040212] w-full h-[100vh]">123213</div>
     </>
   )
 }
