@@ -1,37 +1,50 @@
 import express from "express"
-import cors from "cors"
+import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
+import {validationResult} from "express-validator"
+import bcrypt from "bcrypt"
 
-import {UserController} from "./controllers/index.js"
-import {registerValidation} from "./validations.js"
+import {registerValidation} from "./validations/auth.js"
+import UserModel from "./models/User.js"
 
-import handleValidationErrors from "./utils/handleValidationErr.js"
-
-const App = express()
-
-App.use(cors())
-App.use(express.json())
-
+const app = express()
+app.use(express.json())
 mongoose
-  .connect("mongodb+srv://admin:admin@nerv.jvg8rao.mongodb.net/")
+  .connect("mongodb+srv://admin:admin@nerv.jvg8rao.mongodb.net/bd")
   .then(() => {
-    console.log("DB is connected")
+    console.log("Connected to MongoDB")
   })
   .catch((err) => {
     console.log(err)
   })
 
-App.post("/auth/register", (req, res) => {
-  registerValidation, handleValidationErrors
-  UserController.register
-})
-App.post("/auth/login", (req, res) => {})
-App.get("/auth/getMe", (req, res) => {})
+app.post("/auth/register", registerValidation, async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array()
+    })
+  }
 
-App.listen(process.env.PORT || 4444, (err) => {
+  const password = req.body.password
+  const salt = await bcrypt.genSalt(10)
+  const passwordHash = await bcrypt.hash(password, salt)
+
+  const doc = new UserModel({
+    ...req.body,
+    passwordHash: passwordHash
+  })
+
+  const user = await doc.save()
+
+  res.json({
+    user
+  })
+})
+
+app.listen(4444, (err) => {
   if (err) {
     return console.log(err)
   }
-
-  console.log("Server OK")
+  console.log("Server is running on port 4444")
 })
