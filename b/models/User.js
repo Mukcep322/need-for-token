@@ -8,13 +8,19 @@ const UserSchma = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     passwordHash: {
       type: String,
       required: true
     },
-    avatarUrl: String
+    avatarUrl: String,
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
+    }
   },
   {
     timestamps: true
