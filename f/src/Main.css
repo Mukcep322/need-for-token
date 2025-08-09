@@ -9,3 +9,7 @@
   font-family: "Jost";
   src: url("./fonts/Jost/Jost-VariableFont_wght.ttf") format("truetype");
 }
+
+body {
+  background-color: #060010;
+}

@@ -2,10 +2,11 @@ import {createRoot} from "react-dom/client"
 
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 
+import Header from "./components/Header.jsx"
 import App from "./pages/MainPage.jsx"
 
 createRoot(document.getElementById("root")).render(
-  <div className="relative">
+  <>
     <Header />
     <BrowserRouter>
       <Routes>
@@ -17,5 +18,5 @@ createRoot(document.getElementById("root")).render(
         <Route path="*" element={<div>404</div>} /> */}
       </Routes>
     </BrowserRouter>
-  </div>
+  </>
 )
