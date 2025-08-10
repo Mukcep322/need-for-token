@@ -1,53 +1,64 @@
-import "./glass.css"
 import "../../Main.css"
-import {Container} from "./index"
-import {BigBtnDark} from "../ui/index"
+
+import {Button} from "../ui/index"
+import {motion} from "framer-motion"
 
 import {useState} from "react"
 
 export function Header() {
-  const [isHover, setIsHoverState] = useState(false)
+  const [isHover, setIsHovered] = useState(false)
 
   function setIsHover(value) {
-    setIsHoverState(value)
+    setIsHovered(value)
   }
 
   return (
     <header>
-      <Container className="flex items-center text-white w-fit">
-        <div
-          className="flex gap-20 items-center  pl-4 pr-2.5 py-5 rounded-full glass-effect justify-between h-[65px]"
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}>
-          {/* logo */}
-          <span className="font-[Unbounded] font-semibold text-3xl text-white">
-            Need For Token
+      <motion.div
+        className={`flex gap-20 items-center  pl-4 pr-2.5 py-5 rounded-full glass-effect justify-between h-[65px] relative  transition-all duration-300 width-[360px] z-20`}
+        whileHover={{
+          width: 600,
+          transition: {
+            type: "tween",
+            ease: "linear",
+            duration: 0.3
+          }
+        }}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}>
+        {/* logo */}
+        <span className="font-[Unbounded] font-semibold text-3xl text-white">
+          Need For Token
+        </span>
+        {/* hover me */}
+        {isHover ? (
+          ""
+        ) : (
+          <span
+            className={`text-[#888888] font-[Jost] text-lg cursor-pointer hover:text-gray-300  pr-2  ${
+              isHover ? "opacity-0" : "opacity-100"
+            } transition-opacity duration-1000`}>
+            Hover me!
           </span>
-          {/* hover me */}
-          {isHover ? (
-            ""
-          ) : (
-            <span className="text-[#888888] font-[Jost] text-lg cursor-pointer hover:text-gray-300 transition pr-2">
-              Hover me!
-            </span>
-          )}
+        )}
 
-          {/* hrefs */}
-          {!isHover ? (
-            ""
-          ) : (
-            <>
-              <div className="flex gap-5 items-center font-[Jost] text-lg">
-                <a href="/">Home</a>
-                <a href="/Market">Market</a>
-                <a href="/Leaderboard">Leaderboard</a>
-              </div>
-              {/* btn */}
-              <BigBtnDark Link={"/login"}>Login</BigBtnDark>
-            </>
-          )}
-        </div>
-      </Container>
+        {/* hrefs */}
+        {!isHover ? (
+          ""
+        ) : (
+          <>
+            <div className="flex gap-5 items-center font-[Jost] text-lg">
+              <a href="/">Home</a>
+              <a href="/Market">Market</a>
+              <a href="/Leaderboard">Leaderboard</a>
+            </div>
+            {/* btn */}
+            <Button Link={"/login"} Dark={true}>
+              Login
+            </Button>
+          </>
+        )}
+      </motion.div>
     </header>
   )
 }
@@ -61,9 +72,9 @@ export function Header() {
 //   const [isHovered, setIsHovered] = useState(false)
 
 //   return (
-//     <Container className="flex items-center text-white w-fit">
+//     <Container className="flex items-center text-white">
 //       <motion.header
-//         className={`flex justify-between items-center p-4 bg-gray-800 text-white transition-all duration-300 ${
+//         className={`flex justify-between items-center p-4 bg-gray-800 text-white transition-all duration-300  ${
 //           isHovered ? "w-64" : "w-32"
 //         }`}
 //         onMouseEnter={() => setIsHovered(true)}

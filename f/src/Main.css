@@ -20,4 +20,16 @@ body {
     @apply bg-black text-white font-[Jost] text-lg rounded-full px-5 py-2 hover:bg-[#222222] cursor-pointer;
     transition: 0.2s;
   }
+  .big-light-button {
+    @apply bg-white text-black font-[Jost] text-lg rounded-full px-5 py-2 hover:bg-[#CDCDCD] cursor-pointer;
+    transition: 0.2s;
+  }
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
 }

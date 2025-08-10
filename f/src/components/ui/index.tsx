@@ -1,1 +1,1 @@
-export {BigBtnDark} from "./BigBtnDark"
+export {Button} from "./Button"
