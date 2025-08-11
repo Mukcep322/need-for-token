@@ -1,6 +1,8 @@
 import "../Main.css"
 
 import Orb from "../components/ReactBits/Backgrounds/Orb"
+import TextType from "../components/ReactBits/Animations/TextType"
+
 import {Button} from "../components/ui/Button"
 
 function App() {
@@ -31,10 +33,17 @@ function App() {
           New NFT Market
         </div>
         {/* Middle text */}
-        <div className="w-[500px] text-white font-[Jost] text-3xl mt-15 font-normal">
-          Lorem ipsum dolor sit amet consectetur. Amet habitant ac sed magna.
-          Eget condimentum euismod dignissim integer feugiat amet orci. Lacus
-          nisl id ornare sed.
+        <div>
+          <TextType
+            className="w-[500px] text-white font-[Jost] text-3xl mt-15 font-normal"
+            text={[
+              "Lorem ipsum dolor sit amet consectetur. Amet habitant ac sed magna.Eget condimentum euismod dignissim integer feugiat amet orci. Lacusnisl id ornare sed."
+            ]}
+            typingSpeed={40}
+            pauseDuration={15000000}
+            showCursor={true}
+            cursorCharacter="|"
+          />
         </div>
         {/* Button */}
         <Button Dark={false} Link="/login" className=" z-30 mt-20">

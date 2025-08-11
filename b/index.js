@@ -1,11 +1,11 @@
 import express from "express"
-import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
-import {validationResult} from "express-validator"
-import bcrypt from "bcrypt"
 
 import {registerValidation, loginValidation} from "./validations/auth.js"
-import UserModel from "./models/User.js"
+import {createProductAuth} from "./validations/product.js"
+import {handleValidationErrors, checkAuth} from "./utils/index.js"
+
+import {userController, productController} from "./controllers/index.js"
 
 const app = express()
 app.use(express.json())
@@ -18,88 +18,31 @@ mongoose
     console.log(err)
   })
 
-app.post("/auth/register", registerValidation, async (req, res) => {
-  try {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array()
-      })
-    }
+// User routes
+app.post(
+  "/auth/register",
+  registerValidation,
+  handleValidationErrors,
+  userController.register
+)
+app.post(
+  "/auth/login",
+  loginValidation,
+  handleValidationErrors,
+  userController.login
+)
+app.get("/auth/me", checkAuth, userController.getMe)
 
-    const password = req.body.password
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt)
+// Product routes
+app.post(
+  "/products",
+  checkAuth,
+  createProductAuth,
+  handleValidationErrors,
+  productController.createProduct
+)
 
-    const doc = new UserModel({
-      ...req.body,
-      passwordHash: hash
-    })
-
-    const user = await doc.save()
-
-    const token = jwt.sign(
-      {
-        _id: user._id
-      },
-      "secret",
-      {
-        expiresIn: "30d"
-      }
-    )
-
-    const {passwordHash, ...userData} = user._doc
-
-    res.json({
-      ...userData,
-      token
-    })
-  } catch (err) {
-    return res.status(500).json({
-      error: err
-    })
-  }
-})
-app.post("/auth/login", loginValidation, async (req, res) => {
-  try {
-    const user = await UserModel.findOne({email: req.body.email})
-
-    if (!user) {
-      return res.status(400).json({
-        // юзер не найден
-        error: "Неверный логин или пароль"
-      })
-    }
-
-    const isValidPass = await bcrypt.compare(
-      req.body.password,
-      user._doc.passwordHash
-    )
-    if (!isValidPass) {
-      return res.status(400).json({
-        error: "Неверный логин или пароль"
-      })
-    }
-
-    const token = jwt.sign(
-      {
-        _id: user._id
-      },
-      "secret",
-      {
-        expiresIn: "30d"
-      }
-    )
-
-    res.json({
-      token
-    })
-  } catch (err) {
-    return res.json({
-      error: err
-    })
-  }
-})
+app.get("/products", productController.getAllProducts)
 
 app.listen(4444, (err) => {
   if (err) {
