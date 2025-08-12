@@ -37,30 +37,28 @@ export const getOneProduct = async (req, res) => {
   }
 }
 export const editProduct = async (req, res) => {
-  if (product.owner == req.userId) {
-    try {
-      const product = await ProductModel.findById(req.params.id)
-      if (!product) {
-        return res.status(404).json({
-          message: "Токен не найден"
-        })
+  try {
+    const productId = req.params.id
+
+    await ProductModel.updateOne(
+      {
+        _id: productId
+      },
+      {
+        title: req.body.title,
+        startPrice: req.body.startPrice,
+        imageUrl: req.body.imageUrl,
+        description: req.body.description,
+        count: req.body.count
       }
+    )
 
-      const doc = new ProductModel({
-        ...req.body
-      })
-
-      await doc.save(product)
-
-      res.json(product)
-    } catch (err) {
-      res.status(500).json({
-        message: "Не удалось редактировать токен"
-      })
-    }
-  } else {
-    return res.status(403).json({
-      message: "Вы не можете редактировать чужой токен"
+    res.json({
+      success: true
+    })
+  } catch (err) {
+    res.status(500).json({
+      message: "Не удалось редактировать токен"
     })
   }
 }
