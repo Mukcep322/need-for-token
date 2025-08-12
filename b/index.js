@@ -33,6 +33,13 @@ app.post(
 )
 app.get("/auth/me", checkAuth, userController.getMe)
 
+app.post(
+  "/auth/edit",
+  checkAuth,
+  handleValidationErrors,
+  userController.editUser
+)
+
 // Product routes
 app.post(
   "/products",
@@ -43,6 +50,10 @@ app.post(
 )
 
 app.get("/products", productController.getAllProducts)
+
+app.get("/products/:id", productController.getOneProduct)
+
+app.patch("/products/:id", checkAuth, productController.editProduct)
 
 app.listen(4444, (err) => {
   if (err) {

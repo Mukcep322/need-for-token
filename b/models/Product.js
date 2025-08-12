@@ -21,7 +21,12 @@ const ProductSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true
-    }
+    },
+    count: {
+      type: Number,
+      required: true
+    },
+    owner: String
   },
   {
     timestamps: true

@@ -98,3 +98,5 @@ export const getMe = async (req, res) => {
     })
   }
 }
+
+export const editUser = async (req, res) => {}
