@@ -17,6 +17,8 @@ export const createProduct = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   try {
+    const productId = req.params.id
+
     await ProductModel.updateOne(
       {
         _id: productId

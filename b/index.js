@@ -1,9 +1,10 @@
 import express from "express"
 import mongoose from "mongoose"
 
-import {registerValidation, loginValidation} from "./validations/auth.js"
-import {createProductAuth} from "./validations/product.js"
+import {registerValidation, loginValidation} from "./validations/user.js"
+import {ProductValid, countProductValid} from "./validations/product.js"
 import {isOwner} from "./validations/isOwner.js"
+
 import {handleValidationErrors, checkAuth} from "./utils/!index.js"
 
 import {userController, productController} from "./controllers/!index.js"
@@ -34,20 +35,19 @@ app.post(
 )
 app.get("/auth/me", checkAuth, userController.getMe)
 
-app.post(
-  "/auth/edit",
+app.patch(
+  "/user/:id",
   checkAuth,
   handleValidationErrors,
   userController.editUser
 )
 
-app.patch("/user/:id", checkAuth, userController.editUser)
-
 // Product routes
 app.post(
   "/products",
   checkAuth,
-  createProductAuth,
+  ProductValid,
+  countProductValid,
   handleValidationErrors,
   productController.createProduct
 )
@@ -56,9 +56,22 @@ app.get("/products", productController.getAllProducts)
 
 app.get("/products/:id", productController.getOneProduct)
 
-app.patch("/products/:id", checkAuth, isOwner, productController.editProduct)
+app.patch(
+  "/products/:id",
+  checkAuth,
+  isOwner,
+  ProductValid,
+  handleValidationErrors,
+  productController.editProduct
+)
 
-app.delete("/products/:id", checkAuth, isOwner, productController.deleteProduct)
+app.delete(
+  "/products/:id",
+  checkAuth,
+  isOwner,
+  handleValidationErrors,
+  productController.deleteProduct
+)
 
 app.listen(4444, (err) => {
   if (err) {
