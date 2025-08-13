@@ -55,6 +55,8 @@ app.get("/products/:id", productController.getOneProduct)
 
 app.patch("/products/:id", checkAuth, productController.editProduct)
 
+app.delete("/products/:id", checkAuth, productController.deleteProduct)
+
 app.listen(4444, (err) => {
   if (err) {
     return console.log(err)

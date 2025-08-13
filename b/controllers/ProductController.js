@@ -36,6 +36,7 @@ export const getOneProduct = async (req, res) => {
     res.status(500).json({error: err})
   }
 }
+
 export const editProduct = async (req, res) => {
   try {
     const productId = req.params.id
@@ -59,6 +60,43 @@ export const editProduct = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "Не удалось редактировать токен"
+    })
+  }
+}
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.id
+
+    ProductModel.findOneAndDelete(
+      {
+        _id: productId
+      },
+      {
+        returnDocument: "after"
+      }
+    ).then((doc, err) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({
+          message: "Не удалось удалить токен"
+        })
+      }
+
+      if (!doc) {
+        return res.status(404).json({
+          message: "Токен не найден"
+        })
+      }
+
+      res.json({
+        success: true
+      })
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      message: "Не удалось удалить токен"
     })
   }
 }
