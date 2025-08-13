@@ -99,4 +99,25 @@ export const getMe = async (req, res) => {
   }
 }
 
-export const editUser = async (req, res) => {}
+export const editUser = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId)
+
+    await UserModel.updateOne(
+      {
+        _id: user._id
+      },
+      {
+        username: req.body.username,
+        imageUrl: req.body.imageUrl
+      }
+    )
+    res.json({
+      success: true
+    })
+  } catch (err) {
+    res.status(500).json({
+      message: "Не удалось обновить данные"
+    })
+  }
+}

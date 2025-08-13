@@ -40,6 +40,8 @@ app.post(
   userController.editUser
 )
 
+app.patch("/user/:id", checkAuth, userController.editUser)
+
 // Product routes
 app.post(
   "/products",
