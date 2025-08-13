@@ -33,7 +33,7 @@ export const getOneProduct = async (req, res) => {
     res.json(product)
   } catch (err) {
     console.log(err)
-    res.status(500).json({})
+    res.status(500).json({error: err})
   }
 }
 export const editProduct = async (req, res) => {
