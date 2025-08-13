@@ -42,6 +42,13 @@ app.patch(
   userController.editUser
 )
 
+app.delete(
+  "/user/:id",
+  checkAuth,
+  handleValidationErrors,
+  userController.deleteUser
+)
+
 // Product routes
 app.post(
   "/products",

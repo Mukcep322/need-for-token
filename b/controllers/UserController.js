@@ -80,25 +80,6 @@ export const login = async (req, res) => {
   }
 }
 
-export const getMe = async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.userId)
-    if (!user) {
-      res.status(400).json({
-        error: "Ошибка, попоробуйте позже"
-      })
-    }
-
-    const {...userData} = user._doc
-
-    res.json(userData)
-  } catch (err) {
-    res.status(500).json({
-      message: "Нет доступа"
-    })
-  }
-}
-
 export const editUser = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId)
@@ -118,6 +99,39 @@ export const editUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "Не удалось обновить данные"
+    })
+  }
+}
+
+export const deleteUser = async (req, res) => {
+  try {
+    await UserModel.findByIdAndDelete(req.userId).then(
+      res.status(200).json({
+        success: true
+      })
+    )
+  } catch (err) {
+    res.status(500).json({
+      message: "Не удалось удалить пользователя"
+    })
+  }
+}
+
+export const getMe = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId)
+    if (!user) {
+      res.status(400).json({
+        error: "Ошибка, попоробуйте позже"
+      })
+    }
+
+    const {...userData} = user._doc
+
+    res.json(userData)
+  } catch (err) {
+    res.status(500).json({
+      message: "Нет доступа"
     })
   }
 }
