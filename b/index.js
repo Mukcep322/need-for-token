@@ -3,9 +3,10 @@ import mongoose from "mongoose"
 
 import {registerValidation, loginValidation} from "./validations/auth.js"
 import {createProductAuth} from "./validations/product.js"
-import {handleValidationErrors, checkAuth} from "./utils/index.js"
+import {isOwner} from "./validations/isOwner.js"
+import {handleValidationErrors, checkAuth} from "./utils/!index.js"
 
-import {userController, productController} from "./controllers/index.js"
+import {userController, productController} from "./controllers/!index.js"
 
 const app = express()
 app.use(express.json())
@@ -55,9 +56,9 @@ app.get("/products", productController.getAllProducts)
 
 app.get("/products/:id", productController.getOneProduct)
 
-app.patch("/products/:id", checkAuth, productController.editProduct)
+app.patch("/products/:id", checkAuth, isOwner, productController.editProduct)
 
-app.delete("/products/:id", checkAuth, productController.deleteProduct)
+app.delete("/products/:id", checkAuth, isOwner, productController.deleteProduct)
 
 app.listen(4444, (err) => {
   if (err) {
