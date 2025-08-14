@@ -12,16 +12,16 @@
 }
 
 body {
-  background-color: #060010;
+  background-color: #060110;
 }
 
 @layer utilities {
   .big-dark-button {
-    @apply bg-black text-white font-[Jost] text-lg rounded-full px-5 py-2 hover:bg-[#222222] cursor-pointer;
+    @apply bg-black text-white font-[Jost] text-base rounded-full px-5 py-2 hover:bg-black/80  cursor-pointer;
     transition: 0.2s;
   }
   .big-light-button {
-    @apply bg-white text-black font-[Jost] text-lg rounded-full px-5 py-2 hover:bg-[#CDCDCD] cursor-pointer;
+    @apply bg-white text-black font-[Jost] text-lg rounded-full px-5 py-2 hover:bg-white/80  cursor-pointer;
     transition: 0.2s;
   }
   .glass-effect {
