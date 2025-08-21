@@ -1,5 +1,6 @@
 import express from "express"
 import mongoose from "mongoose"
+import cors from "cors"
 
 import {registerValidation, loginValidation} from "./validations/user.js"
 import {ProductValid, countProductValid} from "./validations/product.js"
@@ -10,6 +11,7 @@ import {handleValidationErrors, checkAuth} from "./utils/!index.js"
 import {userController, productController} from "./controllers/!index.js"
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 mongoose
   .connect("mongodb+srv://admin:admin@nerv.jvg8rao.mongodb.net/bd")
