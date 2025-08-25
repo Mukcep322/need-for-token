@@ -1,7 +1,7 @@
 import "../Main.css"
 
 import Orb from "../components/ReactBits/Backgrounds/Orb"
-import {Link} from "../components/shared/index"
+import {Link} from "../components/ui/index"
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <div className="z-60 flex flex-col gap-2 text-white items-center font-[Unbounded] text-xl ">
             <span>Need For Token</span>
             <span>Is</span>
-            <div className="glass-effect w-fit px-5 py-2.5 z-1 text-sm">
+            <div className="glass-effect w-fit px-5 py-2.5 z-1 text-sm rounded-full">
               New NFT Market
             </div>
           </div>

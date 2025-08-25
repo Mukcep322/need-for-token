@@ -1,8 +1,6 @@
 import RippleGrid from "../components/ReactBits/Backgrounds/RippleGrid.jsx"
 
-import {Link} from "../components/ui/Link.jsx"
-
-function LoginPage() {
+function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center  relative overflow-hidden">
       {/* Ripple Grid Background */}
@@ -22,7 +20,7 @@ function LoginPage() {
       {/* Login Form */}
       <div className="w-full max-w-lg p-8 bg-white/5 backdrop-blur-sm rounded-lg z-10 border border-white/10 ">
         <h1 className="text-2xl text-white mb-8 text-center font-[Unbounded]">
-          Login
+          Register
         </h1>
 
         <form className="space-y-6 font-[Unbounded]">
@@ -34,6 +32,14 @@ function LoginPage() {
               placeholder="Email"
             />
           </div>
+          <div>
+            <input
+              type="username"
+              id="username"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-1 border-white focus:border-gray-200 outline-0 "
+              placeholder="Username"
+            />
+          </div>
 
           <div>
             <input
@@ -42,23 +48,26 @@ function LoginPage() {
               className="w-full px-4 py-2 bg-transparent text-white border-b-1 border-white focus:border-gray-200 outline-0 "
               placeholder="Password"
             />
-            <div className="mt-2 text-left">
-              <a href="/" className="text-sm text-white hover:underline">
-                I forgot my password
-              </a>
-            </div>
+          </div>
+          <div>
+            <input
+              type="password"
+              id="password"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-1 border-white focus:border-gray-200 outline-0 "
+              placeholder="Repeat password"
+            />
           </div>
 
           <div className="flex space-x-4">
             <button
               type="submit"
               className="flex-1 py-2 bg-white hover:bg-white/80 rounded-md text-black font-medium transition-colors cursor-pointer">
-              Login
+              Register
             </button>
             <a
-              href="/register"
+              href="/login"
               className="flex-1 py-2 bg-[#363636] hover:bg-[#363636]/80 rounded-md text-white font-medium transition-colors cursor-pointer text-center">
-              Register
+              Login
             </a>
           </div>
         </form>
@@ -67,4 +76,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
+export default RegisterPage

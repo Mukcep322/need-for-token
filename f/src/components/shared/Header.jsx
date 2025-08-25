@@ -1,7 +1,7 @@
 import "../../Main.css"
 import {motion} from "framer-motion"
 import {Button} from "../ui/index"
-import {Link} from "./index"
+import {Link} from "../ui/index"
 
 import {useState} from "react"
 
@@ -20,24 +20,28 @@ export function Header() {
         setHover(false)
       }}
       initial={{
-        width: "auto"
+        width: "344px"
       }}
       animate={{
-        width: isHovered ? "607px" : "344px"
+        width: isHovered ? "645px" : "344px"
       }}>
       {/* Logo */}
+      <Link to="/">
+        <img src="./Logo.png" alt="logo" className="w-[12em]" />
+      </Link>
 
-      <img src="./Logo.png" alt="logo" className="w-[12em]" />
       {isHovered ? (
         ""
       ) : (
-        <span className="text-[#888888] font-[Jost] text-sm">Hover me!</span>
+        <span className="text-[#888888] font-[Jost] text-sm whitespace-nowrap">
+          Hover me!
+        </span>
       )}
 
       {isHovered ? (
         <>
-          <div className="flex gap-6 items-center">
-            <Link to="/">Home</Link>
+          <div className="flex gap-6 items-center  whitespace-nowrap">
+            <Link to="/Create">Create token</Link>
             <Link to="/Market">Market</Link>
             <Link to="/Leaderboard">Leaderboard</Link>
           </div>
