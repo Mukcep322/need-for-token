@@ -1,7 +1,18 @@
 import LightRays from "../components/ReactBits/Backgrounds/LightRays"
 import CardItem from "../components/shared/CardItem.jsx"
 
+import React from "react"
+import {useDispatch} from "react-redux"
+
+import {fetchProducts} from "../redux/slices/products"
+
 function MarketPage() {
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
     <div className="relative">
       <div
