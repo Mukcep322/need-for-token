@@ -1,5 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
+import cors from "cors"
+import multer from "multer"
 
 import {registerValidation, loginValidation} from "./validations/user.js"
 import {ProductValid, countProductValid} from "./validations/product.js"
@@ -11,6 +13,7 @@ import {userController, productController} from "./controllers/!index.js"
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 mongoose
   .connect("mongodb+srv://admin:admin@nerv.jvg8rao.mongodb.net/bd")
   .then(() => {
@@ -19,6 +22,24 @@ mongoose
   .catch((err) => {
     console.log(err)
   })
+
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, "uploads/")
+  },
+  filename: (_, file, cb) => {
+    const uniqueName = `${Date.now()}-${file.originalname}`
+    cb(null, uniqueName)
+  }
+})
+
+const upload = multer({storage})
+
+app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.filename}`
+  })
+})
 
 // User routes
 app.post(
