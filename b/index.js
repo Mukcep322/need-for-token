@@ -13,6 +13,7 @@ import {userController, productController} from "./controllers/!index.js"
 
 const app = express()
 app.use(express.json())
+app.use("/uploads", express.static("uploads"))
 app.use(cors())
 mongoose
   .connect("mongodb+srv://admin:admin@nerv.jvg8rao.mongodb.net/bd")
