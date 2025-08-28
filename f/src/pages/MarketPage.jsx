@@ -2,12 +2,15 @@ import LightRays from "../components/ReactBits/Backgrounds/LightRays"
 import CardItem from "../components/shared/CardItem.jsx"
 
 import React from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
 import {fetchProducts} from "../redux/slices/products"
 
 function MarketPage() {
   const dispatch = useDispatch()
+  const {tokens, collections} = useSelector((state) => state.products)
+
+  const isProductsLoading = tokens.status === "loading"
 
   React.useEffect(() => {
     dispatch(fetchProducts())
@@ -16,7 +19,7 @@ function MarketPage() {
   return (
     <div className="relative">
       <div
-        style={{width: "100%", height: "600px", position: "fixed"}}
+        style={{width: "100%", height: "100%", position: "fixed"}}
         className="z-0 fixed">
         <LightRays
           raysOrigin="top-center"
@@ -36,12 +39,15 @@ function MarketPage() {
               Popular Items
             </span>
             <div className="flex gap-2">
-              <CardItem />
-              <CardItem />
-              <CardItem />
-              <CardItem />
-              <CardItem />
-              <CardItem />
+              {(isProductsLoading ? [...Array(5)] : tokens.items).map(
+                (obj, index) =>
+                  !isProductsLoading ? (
+                    <CardItem key={index} props={{...obj}} />
+                  ) : (
+                    "nothing"
+                  )
+                // Сделать скелет постов надо вместо ковычек
+              )}
             </div>
           </div>
         </div>
